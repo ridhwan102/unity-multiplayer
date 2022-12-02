@@ -6,21 +6,24 @@ using Photon.Pun;
 
 public class player : MonoBehaviour
 {
-    private float moveSpeed = 2f, mouseSensitivity = 90f;
+    public float moveSpeed = 2f, mouseSensitivity = 90f;
     private TextMeshPro nameText;
     private CharacterController controller;
     private float xRotation, gravity;
     private Camera mainCamera;
     private PhotonView view;
+    private GameManager gm;
     
-    void Start(){
+    void Awake(){
         controller = GetComponent<CharacterController>();
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         view = GetComponent<PhotonView>();
         mainCamera = transform.Find("Main Camera").GetComponent<Camera>();
         nameText = transform.Find("Text (TMP)").GetComponent<TextMeshPro>();
         nameText.text = "Player " + view.CreatorActorNr;
 
         if (view.IsMine){
+            transform.tag = "Player";
             mainCamera.gameObject.tag = "MainCamera";
             mainCamera.gameObject.SetActive(true);
             nameText.gameObject.SetActive(false);
@@ -28,7 +31,7 @@ public class player : MonoBehaviour
     }
 
     void Update(){
-        if (view.IsMine){
+        if (view.IsMine && gm.isPlaying){
             gravity -= 9.81f * Time.deltaTime;
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;        

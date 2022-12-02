@@ -10,6 +10,8 @@ public class uiButton : MonoBehaviour
         if (closeTarget != null){
             closeTarget.SetActive(false);
         }
-        openTarget.SetActive(true);
+        if (openTarget != null){
+            openTarget.SetActive(true);
+        }
     }
 }

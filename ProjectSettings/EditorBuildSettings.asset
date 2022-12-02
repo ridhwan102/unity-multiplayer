@@ -17,4 +17,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/room3.unity
     guid: 98b38528bd9adce44bb7b57056a396f5
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: bcb98985f9f12c241a5589d2013d68dd, type: 2}
